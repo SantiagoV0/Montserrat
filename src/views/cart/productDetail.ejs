@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <!-- header -->
+    <%- include('../partials/header.ejs') %>
+    <main class="main">
+        <div>
+            <section class="container">
+                <div class="product-detail">
+                    <div class="product-view-box">
+                        <div class="column-product-view">
+                            <div class="product-view__image-container">
+                                <img class="product-view__image" src="/images/products/<%= product.image%>" alt="img">
+                            </div>
+                        </div>
+                        <div class="column-product-information">
+                            <div class="product-information__item">
+                                <h2 class="product-information__name"><%= product.name%></h2>
+                            </div>
+                            <div class="product-information__item">
+                                <div class="product-card__rating">
+                                    <span class="product-card__rating-number"><%= product.rating%></span>
+                                    <span class="product-card__ratings">
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                    </span>
+                                    <span class="product-card__amount">(555)</span>
+                                </div>
+                            </div>
+                            <div class="product-information__item product-information__item--price">
+                                <% if(product.discount){ %>
+                                <div class="item__price-previous">
+                                    <span class="product-card__symbol">$</span>
+                                    <span><%= toThousend(product.price)%></span>
+                                </div>
+                                <% } %>
+                                <div class="item__price">
+                                    <span class="item__symbol">$</span>
+                                    <span><%= toThousend(product.price-(product.price*product.discount/100))%></span>
+                                    <% if(product.discount){ %>
+                                    <span class="item__price-discount"><%= product.discount%> % OFF</span>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="product-information__item product-information__item--ingredients">
+                                <!-- <h4 class="product-information__tittle">Ingredientes</h4>
+                                <div class="product-information__ingredients-list">
+                                    <ul class="product-information__ul">
+                                        % for(let i=0; i<product.ingredients.length; i++){%>
+                                        <li class="product-information__li">%=product.ingredients[i]%></li>
+                                        %}%>
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-panel">
+                        <button class="button button__product-panel" type="">Comprar ahora</button>
+                        <button class="button button__product-panel" type="">Agregar al carro</button>
+                        <a href="/product/update/<%= product.id%>" class="button button__product-panel button__product-panel--delete" type="">Modificar</a>
+                        <form action="/product/delete/<%= product.id %>?_method=DELETE" method="post">
+                            <button type="submit" class="button button__product-panel button__product-panel--delete" type="">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- footer -->
+    <%- include('../partials/footer') %>
+</body>
+</html>

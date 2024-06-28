@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <!-- header -->
+    <%- include('../partials/header.ejs') %>
+    <main class="main">
+        <div>
+            <section class="container container-fit">
+                <div class="form form--wide">
+                    <h2 class="form__head">Editar: <%= productToEdit.name %></h2>
+                    <div class="product-create-box__collumn-container">
+                        <form class="form__form-items" action="/product/update/<%= productToEdit.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                            <div class="form__form-items-column">
+                                <div class="form__item">
+                                    <input class="form__input" type="text" name="name" value="<%= productToEdit.name %>">
+                                </div>
+                                <div class="form__item">
+                                    <select class="form__input" name="type" id="">
+                                        <option value="food">Comida</option>
+                                        <option value="drink">Bebida</option>
+                                        <option value="dessert">Postre</option>
+                                    </select>
+                                </div>
+                                <div class="form__item">
+                                    <input class="form__input" type="number" name="price" id="" value="<%= productToEdit.price %>">
+                                </div>
+                                <div class="form__item">
+                                    <input class="form__input" type="number" name="discount" id="" value="<%= productToEdit.discount %>">
+                                </div>
+                                <div class="form__item">
+                                    <input class="form__input" type="text" name="category" id="" value="<%= productToEdit.category %>">
+                                </div>
+                            </div>
+                            <div class="form__form-items-column--right">
+                                <input class="form__input-file" type="file" name="productImage" id="productImage" multiple>
+                                <label for="productImage">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <span class="iborrainputfile">Seleccionar archivo</span>
+                                </label>
+                            </div>
+                            <div class="form__footer">
+                                <button class="button" type="submit">Modificar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- footer -->
+    <!-- <%- include('../partials/footer') %> -->
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <!-- header -->
+    <%- include('../partials/header.ejs') %>
+    <main class="main">
+        <div>
+            <section class="container container-form">
+                <div class="form form--wide">
+                    <div>
+                        <h2 class="form__head">Crear producto</h2>
+                        <% console.log(locals.errors); %>
+                    </div>
+                    <form class="form__form-items" action="/product" method="post" enctype="multipart/form-data">
+                        <div class="form__form-items-column">
+                            <div class="form__item">
+                                <input class="form__input" type="text" name="name" placeholder="Nombre" value="<%= locals.oldData && oldData.name ? oldData.name : '' %>">
+                                <% if(locals.errors && errors.name ){ %>
+                                    <p class="form__input-msg"><i class="form__input-msg-i fa-solid fa-circle-exclamation"></i><%= errors.name.msg %></p>
+                                <% } %>
+                            </div>
+                            <div class="form__item">
+                                <select class="form__input" name="type" id="">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="food" <%= locals.oldData && oldData.type === 'food' ? 'selected' : '' %> >Comida</option>
+                                    <option value="drink" <%= locals.oldData && oldData.type === 'drink' ? 'selected' : '' %> >Bebida</option>
+                                    <option value="dessert" <%= locals.oldData && oldData.type === 'dessert' ? 'selected' : '' %>>Postre</option>
+                                </select>
+                                <% if(locals.errors && errors.type ){ %>
+                                    <p class="form__input-msg"><i class="form__input-msg-i fa-solid fa-circle-exclamation"></i><%= errors.type.msg %></p>
+                                <% } %>
+                            </div>
+                            <div class="form__item">
+                                <input class="form__input" type="number" name="price" id="" placeholder="Precio" value="<%= locals.oldData && oldData.price ? oldData.price : '' %>">
+                                <% if(locals.errors && errors.price ){ %>
+                                    <p class="form__input-msg"><i class="form__input-msg-i fa-solid fa-circle-exclamation"></i><%= errors.price.msg %></p>
+                                <% } %>
+                            </div>
+                            <div class="form__item">
+                                <input class="form__input" type="number" name="discount" id="" placeholder="Descuento" value="<%= locals.oldData && oldData.discount ? oldData.discount : '' %>">
+                                <% if(locals.errors && errors.discount ){ %>
+                                    <p class="form__input-msg"><i class="form__input-msg-i fa-solid fa-circle-exclamation"></i><%= errors.discount.msg %></p>
+                                <% } %>
+                            </div>
+                            <div class="form__item">
+                                <input class="form__input" type="text" name="category" id="" placeholder="Category">
+                                <% if(locals.errors && errors.category ){ %>
+                                    <p class="form__input-msg"><i class="form__input-msg-i fa-solid fa-circle-exclamation"></i><%= errors.category.msg %></p>
+                                <% } %>
+                            </div>
+                        </div>
+                        <!-- file -->
+                        <div class="form__form-items-column form__form-items-column--right">
+                            <input class="form__input-file" type="file" name="productImage" id="productImage" multiple>
+                            <label for="productImage">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span class="iborrainputfile">Seleccionar archivo</span>
+                            </label>
+                        </div>
+                        <div class="form__footer form__footer--row">
+                            <button class="button-elongated button-elongated--row" type="reset">Cancelar</button>
+                            <button class="button-elongated button-elongated--row type="submit">Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- footer -->
+    <!-- <%- include('../partials/footer') %> -->
+</body>
+</html>

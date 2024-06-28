@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs') %>
+<body>
+    <!-- header -->
+    <%- include('../partials/header.ejs') %>
+    <main class="main">
+        <div>
+            <section class="container">
+                <div class="product">
+                    <div class="column-menu-filter">
+                        <div class="column-menu-filter__text">
+                            <h3>Filtrar resultados por:</h3>
+                        </div>
+                        <div class="column-menu-filter__menu">
+                            <div class="column-menu-filter__menu-button">
+                                <i class="column-menu-filter__icon fa-solid fa-martini-glass-citrus"></i>
+                                <h4 class="">bebidas</h4>
+                            </div>
+                            <div class="column-menu-filter__menu-button">
+                                <i class="column-menu-filter__icon fa-solid fa-utensils"></i>
+                                <h4 class="">comidas</h4>
+                            </div>
+                            <div class="column-menu-filter__menu-button">
+                                <i class="column-menu-filter__icon fa-solid fa-ice-cream"></i>
+                                <h4 class="">postres</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-product-list">
+                        <div class="product-category">
+                            <!-- Aquí insertaremos una cabecera que contendrá las marcas disponibles al firltrar por bebidas -->
+                        </div>
+                        <ol class="product-list">
+                            <!-- card -->
+                            <%products.map(item => {%>
+                            <li class="product-card">
+                                <a href="/product/details/<%= item.id%>" class="product-card__cont-img">
+                                    <img class="product-card__img" alt="" src="/images/products/<%= item.image ? item.image : 'default.png' %>">
+                                </a>
+                                <div class="product-card__cont-information">
+                                    <div class="product-card__cont">
+                                        <label class="product-card__label" for=""><%= item.category%></label>
+                                    </div>
+                                    <div class="product-card__cont">
+                                        <h2 class="product-card__title"><%= item.name%></h2>
+                                    </div>
+                                    <div class="product-card__cont">
+                                        <div class="product-card__item-group product-card__item-group--left">
+                                            <% if(item.discount){ %>
+                                            <div class="product-card__price-previous">
+                                                <span class="product-card__symbol">$</span>
+                                                <span><%= toThousend(item.price)%></span>
+                                            </div>
+                                            <% } %>
+                                            <div class="product-card__price">
+                                                <span class="product-card__symbol">$</span>
+                                                <span class=""><%= toThousend(item.price-(item.price*item.discount/100))%></span>
+                                                <% if(item.discount){ %>
+                                                <span class="product-card__price-discount"><%= item.discount %> % OFF</span>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                        <div class="product-card__item-group product-card__item-group--right">
+                                            <div class="product-card__rating">
+                                                <span class="product-card__rating-number">4.7</span>
+                                                <span class="product-card__ratings">
+                                                    <span class="fas fa-star"></span>
+                                                    <span class="fas fa-star"></span>
+                                                    <span class="fas fa-star"></span>
+                                                    <span class="fas fa-star"></span>
+                                                    <span class="fas fa-star"></span>
+                                                </span>
+                                                <span class="product-card__amount">(555)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card__bookmark">
+                                    <i class="product-card__icon fa-regular fa-heart"></i>
+                                </div>
+                            </li>
+                            <%})%>
+                            <!-- /card -->
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- footer -->
+    <%- include('../partials/footer') %>
+</body>
+</html>
